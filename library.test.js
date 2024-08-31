@@ -21,4 +21,15 @@ describe("Library Management System", () => {
         let book1=new Book(123456,'','Michael Sipser',2012);
         expect(()=>library.addBook(book1)).toThrow('All fields (ISBN, title, author, publicationYear) are required.')
     })
+
+    test("should not add a book with an duplicate ISBN which is already present",()=>{
+        let book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
+        library.addBook(book1);
+        expect(()=>library.addBook(book1)).toThrow('The same ISBN number book is already present.')
+    })
+
+    test("should not add a if ISBN number length is less than 6",()=>{
+        let book1 = new Book(123, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
+        expect(()=>library.addBook(book1)).toThrow('The ISBN number length should be greater than 5')
+    })
 });
