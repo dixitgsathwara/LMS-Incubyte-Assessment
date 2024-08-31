@@ -23,13 +23,11 @@ class Library{
     returnBook(isbn){
         const book = this.books.find(b => b.isbn === isbn);
         this.checkBookIsAvailableInTheLibrary(book);
-        if(!book.isBorrowed){
-            throw new Error("Book was not borrowed");
-        }
-        book.isBorrowed=false;
+        this.checkBookWasBorrowedOrNot(book);
+        
         return 'Book is return successfully'
     }
-    
+
     validateBook(book) {
         if (!book.isbn || !book.title || !book.author || !book.publicationYear) {
             throw new Error('All fields (ISBN, title, author, publicationYear) are required');
@@ -67,6 +65,15 @@ class Library{
         }
         else{
             book.isBorrowed = true;
+        }
+    }
+
+    checkBookWasBorrowedOrNot(book){
+        if (!book.isBorrowed) {
+            throw new Error('Book was not borrowed');
+        }
+        else{
+            book.isBorrowed = false;
         }
     }
 
