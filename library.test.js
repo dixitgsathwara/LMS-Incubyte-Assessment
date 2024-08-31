@@ -16,4 +16,9 @@ describe("Library Management System", () => {
         library.addBook(book1);
         expect(library.books).toContain(book1);
     });
+    
+    test("should not add book with any missing field(isbn,title,author,publicationYear)",()=>{
+        let book1=new Book(123456,'','Michael Sipser',2012);
+        expect(()=>library.addBook(book1)).toThrow('All fields (ISBN, title, author, publicationYear) are required.')
+    })
 });
