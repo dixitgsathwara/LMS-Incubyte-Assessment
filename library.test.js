@@ -80,40 +80,43 @@ describe("Library Management System", () => {
             expect(library.returnBook(book1.isbn)).toBe('Book is return successfully')
         })
     })
-
-    test('should show all the available books', () => {
-        let book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
-        let book2 = new Book(123457, 'A Handbook of Agile Software Craftsmanship', 'Robert C. Martin', 2008);
-        library.addBook(book1);
-        library.addBook(book2);
-        library.borrowBook(123456);
+    describe('test cases for the View Available Books',()=>{
+        let book1;
+        let book2;
+        beforeEach(()=>{
+            book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
+            book2 = new Book(123457, 'A Handbook of Agile Software Craftsmanship', 'Robert C. Martin', 2008);
+        });
+        test('should show all the available books', () => {
+            library.addBook(book1);
+            library.addBook(book2);
+            library.borrowBook(123456);
+            
+            const availableBooks = library.showAvailableBooks();
+            expect(availableBooks.length).toBe(1);
+            expect(availableBooks[0].isbn).toBe(123457);
+          });
         
-        const availableBooks = library.showAvailableBooks();
-        expect(availableBooks.length).toBe(1);
-        expect(availableBooks[0].isbn).toBe(123457);
-      });
-    
-      test('should show no available books when all are borrowed', () => {
-        let book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
-        let book2 = new Book(123457, 'A Handbook of Agile Software Craftsmanship', 'Robert C. Martin', 2008);
-        library.addBook(book1);
-        library.addBook(book2);
-        library.borrowBook(123456);
-        library.borrowBook(123457);
+          test('should show no available books when all are borrowed', () => {
         
-        const availableBooks = library.showAvailableBooks();
-        expect(availableBooks.length).toBe(0);
-      });
-    
-      test('should show all books as available if none are borrowed', () => {
-        let book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
-        let book2 = new Book(123457, 'A Handbook of Agile Software Craftsmanship', 'Robert C. Martin', 2008);
-        library.addBook(book1);
-        library.addBook(book2);
+            library.addBook(book1);
+            library.addBook(book2);
+            library.borrowBook(123456);
+            library.borrowBook(123457);
+            
+            const availableBooks = library.showAvailableBooks();
+            expect(availableBooks.length).toBe(0);
+          });
         
-        const availableBooks = library.showAvailableBooks();
-        expect(availableBooks.length).toBe(2);
-        expect(availableBooks[0].isbn).toBe(123456);
-        expect(availableBooks[1].isbn).toBe(123457);
-    });
+          test('should show all books as available if none are borrowed', () => {
+            
+            library.addBook(book1);
+            library.addBook(book2);
+            
+            const availableBooks = library.showAvailableBooks();
+            expect(availableBooks.length).toBe(2);
+            expect(availableBooks[0].isbn).toBe(123456);
+            expect(availableBooks[1].isbn).toBe(123457);
+        });
+    })
 });
