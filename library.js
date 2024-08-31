@@ -24,8 +24,12 @@ class Library{
         const book = this.books.find(b => b.isbn === isbn);
         this.checkBookIsAvailableInTheLibrary(book);
         this.checkBookWasBorrowedOrNot(book);
-        
+
         return 'Book is return successfully'
+    }
+
+    showAvailableBooks() {
+        return this.books.filter(b => !b.isBorrowed);
     }
 
     validateBook(book) {
