@@ -32,4 +32,10 @@ describe("Library Management System", () => {
         let book1 = new Book(123, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
         expect(()=>library.addBook(book1)).toThrow('The ISBN number length should be greater than 5')
     })
+
+    test("should not enter the invalid publicationYear in the past",()=>{
+        let book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 20120);
+        expect(()=>library.addBook(book1)).toThrow('Write the valid publication year in the past');
+    })
+
 });
