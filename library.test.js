@@ -1,6 +1,13 @@
 const Library=require('./library')
 
-test('should initialize a library with an empty books array', () => {
-    const library = new Library(); 
-    expect(library.books).toEqual([]); 
+describe("Library Management System", () => {
+    let library;
+
+    beforeEach(() => {
+        library = new Library(); 
+    });
+
+    test('should initialize a library with an empty books array', () => {
+        expect(library.books).toEqual([]); 
+    });
 });
