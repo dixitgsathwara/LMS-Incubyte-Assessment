@@ -60,4 +60,19 @@ describe("Library Management System", () => {
             expect(library.borrowBook(123456)).toBe('Book borrowed successfully');
         })
     })
+
+    test("should not return book if it's not available in the library",()=>{
+        expect(()=>library.returnBook(123456)).toThrow('Book not found')
+    })
+    test("should not return book if it's not borrowed",()=>{
+        let book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
+        library.addBook(book1);
+        expect(()=>library.returnBook(book1.isbn)).toThrow('Book was not borrowed')
+    })
+    test("should  return book if it's borrowed",()=>{
+        let book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
+        library.addBook(book1);
+        library.borrowBook(book1.isbn)
+        expect(library.returnBook(book1.isbn)).toBe('Book is return successfully')
+    })
 });
