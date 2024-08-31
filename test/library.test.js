@@ -1,6 +1,6 @@
 //--- Import the necessary classes ---
-const Library = require('./library');
-const Book = require('./book');
+const Library = require('../src/library');
+const Book = require('../src/book');
 
 //--- Top-level describe block for the Library Management System tests ---
 describe("Library Management System", () => {
