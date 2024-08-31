@@ -35,5 +35,16 @@ class Library{
             throw new Error('Write the valid publication year in the past');
         }
     }
+    borrowBook(isbn) {
+        const book = this.books.find(b => b.isbn === isbn);
+        if (!book) {
+            throw new Error('Book not found');
+        }
+        if (book.isBorrowed) {
+            throw new Error('Book is already borrowed');
+        }
+        book.isBorrowed = true;
+        return 'Book borrowed successfully';
+    }
 }
 module.exports=Library;
