@@ -12,6 +12,9 @@ class Library{
         if(book.isbn < 99999){
             throw new Error('The ISBN number length should be greater than 5');
         }
+        if(book.publicationYear > new Date().getFullYear()) {
+            throw new Error('Write the valid publication year in the past');
+        }
         this.books.push(book);
         return this.books;
     }
