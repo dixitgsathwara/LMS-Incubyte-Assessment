@@ -41,20 +41,23 @@ describe("Library Management System", () => {
         })
     })
 
-    test("should not borrowed book if it's not added to the library",()=>{
-        expect(()=>library.borrowBook(123456)).toThrow('Book not found');
-    })
-    test("should not borrowed book if it's not availabe",()=>{
-        let book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
-        library.addBook(book1);
-        library.borrowBook(123456);
-        expect(()=>library.borrowBook(123456)).toThrow('Book is already borrowed');
-    })
-    test("should borrowed book if it's availabe",()=>{
-        let book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
-        library.addBook(book1);
-        expect(library.borrowBook(123456)).toBe('Book borrowed successfully');
-    })
+    describe("test cases for borrow book",()=>{
 
+        test("should not borrowed book if it's not added to the library",()=>{
+            expect(()=>library.borrowBook(123456)).toThrow('Book not found');
+        })
 
+        test("should not borrowed book if it's not availabe",()=>{
+            let book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
+            library.addBook(book1);
+            library.borrowBook(123456);
+            expect(()=>library.borrowBook(123456)).toThrow('Book is already borrowed');
+        })
+
+        test("should borrowed book if it's availabe",()=>{
+            let book1 = new Book(123456, 'Introduction to the Theory of Computation', 'Michael Sipser', 2012);
+            library.addBook(book1);
+            expect(library.borrowBook(123456)).toBe('Book borrowed successfully');
+        })
+    })
 });

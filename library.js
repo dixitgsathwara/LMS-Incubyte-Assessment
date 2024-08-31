@@ -11,6 +11,15 @@ class Library{
         this.books.push(book);
     }
 
+    borrowBook(isbn) {
+        const book = this.books.find(b => b.isbn === isbn);
+        
+        this.checkBookIsAvailableInTheLibrary(book);
+        this.checkBookIsBorrowedOrNot(book);
+
+        return 'Book borrowed successfully';
+    }
+
     validateBook(book) {
         if (!book.isbn || !book.title || !book.author || !book.publicationYear) {
             throw new Error('All fields (ISBN, title, author, publicationYear) are required');
@@ -35,16 +44,21 @@ class Library{
             throw new Error('Write the valid publication year in the past');
         }
     }
-    borrowBook(isbn) {
-        const book = this.books.find(b => b.isbn === isbn);
+
+    checkBookIsAvailableInTheLibrary(book){
         if (!book) {
             throw new Error('Book not found');
         }
+    }
+    
+    checkBookIsBorrowedOrNot(book){
         if (book.isBorrowed) {
             throw new Error('Book is already borrowed');
         }
-        book.isBorrowed = true;
-        return 'Book borrowed successfully';
+        else{
+            book.isBorrowed = true;
+        }
     }
+
 }
 module.exports=Library;
