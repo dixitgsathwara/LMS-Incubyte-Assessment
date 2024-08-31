@@ -1,10 +1,14 @@
-class Book{
+/**
+ * Represents a book in the library.
+ */
+class Book {
     constructor(isbn, title, author, publicationYear) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.publicationYear = publicationYear;
-        this.isBorrowed = false; 
+        this.isbn = isbn;  // The unique identifier for the book (e.g., ISBN).
+        this.title = title;  // The title of the book.
+        this.author = author;  // The author of the book.
+        this.publicationYear = publicationYear;  // The year the book was published.
+        this.isBorrowed = false;  // Boolean flag to indicate if the book is borrowed or available.
     }
 }
-module.exports=Book;
+// --- Exports the Book class for use in other files ---
+module.exports = Book;
